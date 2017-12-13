@@ -18,20 +18,20 @@ void loop(){
 void obstacle ()
 {
   bool val = digitalRead (obstacleSensor) ; // read sensor signal
-  int sensorcount = 0;
+  int obstacleCount = 0;
   
   if (val == HIGH){ // if sensor signal, turn on led
     Serial.println("No obstacles");
-    sensorcount = 0;
+    obstacleCount = 0;
    }
   else {
     Serial.println("Obstacle, move bitch, get out the way!");
-    sensorcount++; 
+    obstacleCount++; 
   }
   //Serial.println("------------------------------------");
   delay(1000); // interval 
 
-  if (sensorcount >= 15) {
+  if (obstacleCount >= 10) { //if X concurrent obstacles; it's probably full
     Serial.println("Something is probably full!")
     //do stuff here
   }
