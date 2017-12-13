@@ -1,4 +1,5 @@
 int obstacleSensor = 10; //pin for sensor
+
 // GND = GND
 // V+ = 5V
 // Signal = Pin 10
@@ -13,20 +14,25 @@ void setup ()
 
 void loop(){
  obstacle();
-  
 }
 void obstacle ()
 {
   bool val = digitalRead (obstacleSensor) ; // read sensor signal
-   
-  if (val == HIGH) // if sensor signal, turn on led
-  {
+  int sensorcount = 0;
+  
+  if (val == HIGH){ // if sensor signal, turn on led
     Serial.println("No obstacles");
-  }
-  else
-  {
+    sensorcount = 0;
+   }
+  else {
     Serial.println("Obstacle, move bitch, get out the way!");
+    sensorcount++; 
   }
-  Serial.println("------------------------------------");
-  delay(500); // interval 
+  //Serial.println("------------------------------------");
+  delay(1000); // interval 
+
+  if (sensorcount >= 15) {
+    Serial.println("Something is probably full!")
+    //do stuff here
+  }
 }
