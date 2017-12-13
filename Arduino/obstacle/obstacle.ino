@@ -1,12 +1,13 @@
-int obstacleSensor = 10; //pin for sensor
-int obstacleCount = 0; // for differentiating between one time events and continuos obstacle
-int obstacleInterval = 1000; // interval (ms)
 
 // CABLING LAYOUT
 // GND = GND
 // V+ = 5V
 // Signal = Pin 10
 // Enable = Not needed with jumper on
+
+int obstacleSensor = 10; //pin for sensor
+int obstacleCount = 0; // for differentiating between one time events and continuos obstacle
+int obstacleInterval = 1000; // interval (ms)
 
 void setup ()
 {
