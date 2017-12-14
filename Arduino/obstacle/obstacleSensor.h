@@ -7,7 +7,7 @@
 class obstacleSensor {
 	public:
 		obstacleSensor(int pin, int interval);
-		void start();
+		int start();
 	private:
 		int _pin;
 		int _interval;

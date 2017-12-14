@@ -11,18 +11,28 @@ obstacleSensor::obstacleSensor(int pin, int interval) {
 	_count;
 }
 
-void obstacleSensor::start() { 
-	bool val = digitalRead (_pin) ; // read sensor signal
+int obstacleSensor::start() { 
+	bool val = digitalRead (_pin); // read sensor signal
+	int s = 0;
 // if sensor signal, turn on led and report obstacle
 	if (val == HIGH){
 		_count = 0;
+		s = 0;
 	}
 	else {
 		_count++;
-		//if seen for 10 * interval
-		(_count >= 10) ? (Serial.println("Something is probably full!")) : Serial.println("Something was there, better wait if it's still there after next cycle");
 		//if seen for 100 reset (no overflow)
 		(_count >= 100) ? (_count = 0):false;
+		//if seen for 10 * interval
+		if (_count >= 10) {
+			Serial.println("Something is probably full!");
+			s = 1;
+		}
+		else {
+			Serial.println("Something was there, better wait if it's still there after next cycle");
+			s = 0;
+		}
 	}
 	delay(_interval);
+	return s;
 }
