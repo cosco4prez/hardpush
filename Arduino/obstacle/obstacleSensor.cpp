@@ -8,7 +8,7 @@ obstacleSensor::obstacleSensor(int pin, int interval) {
 	pinMode(pin, INPUT);
 	_pin = pin;
 	_interval = interval;
-	_count = 0;
+	_count;
 }
 
 void obstacleSensor::start() { 

@@ -11,7 +11,7 @@ class obstacleSensor {
 	private:
 		int _pin;
 		int _interval;
-		int _count;
+		int _count = 0;
 };
 
 #endif
