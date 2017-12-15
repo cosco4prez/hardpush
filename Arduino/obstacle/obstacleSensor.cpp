@@ -22,16 +22,16 @@ int obstacleSensor::start() {
 	else {
 		_count++;
 		//if seen for 100 reset (no overflow)
-		(_count >= 100) ? (_count = 0):false;
 		//if seen for 10 * interval
-		if (_count >= 10) {
-			Serial.println("Something is probably full!");
+		if (_count >= 5) {
+			//Serial.println("Probably full!");
 			s = 1;
 		}
 		else {
-			Serial.println("Something was there, better wait if it's still there after next cycle");
+			//Serial.println("Something was there, better wait if it's still there after next cycle");
 			s = 0;
 		}
+		(_count >= 100) ? (_count = 0):false;
 	}
 	delay(_interval);
 	return s;
