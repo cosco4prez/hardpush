@@ -15,10 +15,10 @@ void Receiver::setup() {
 	vw_rx_start();
 }
 
-char Receiver::start() {
+int Receiver::start() {
 	uint8_t buf[VW_MAX_MESSAGE_LEN];
 	uint8_t buflen = VW_MAX_MESSAGE_LEN;
-
+	
   if (vw_get_message(buf, &buflen)) {
     _currentPacket = (uint8_t) buf[0];
     Serial.print("Receiver got: ");

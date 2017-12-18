@@ -8,7 +8,7 @@ class Receiver {
 	public:
 		Receiver(int rx_pin, int _transmit_speed);
 		void setup();
-		char start();
+		int start();
 	private:
 		int _rx_pin;
 		int _transmit_speed;

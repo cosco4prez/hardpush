@@ -23,7 +23,7 @@ int obstacleSensor::start() {
 		_count++;
 		//if seen for 100 reset (no overflow)
 		//if seen for 10 * interval
-		if (_count >= 5) {
+		if (_count >= 3) {
 			//Serial.println("Probably full!");
 			s = 1;
 		}
