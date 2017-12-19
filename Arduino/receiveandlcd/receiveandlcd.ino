@@ -36,6 +36,7 @@ int maxBrightness = 255;
 int minBrightness = 25;
 int fadeAmount = 2;
 
+int id, recvalue;
 Receiver recv(recPin,transmFreq);
 
 void setup() {
@@ -54,6 +55,7 @@ void setup() {
 
 void loop() {
 
+  int p = sscanf ((char*)recv.start(), "%d%*c%d%", &id, &recvalue);
   int s = recv.start();
 
 switch (s) {
@@ -73,6 +75,7 @@ switch (s) {
     delay(250);
     
   Serial.println(s);
+  Serial.println(p);
   lcd.clear();
   analogWrite(redPin, 0);
   analogWrite(greenPin, 0);
