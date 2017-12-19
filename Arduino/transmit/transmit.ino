@@ -22,8 +22,9 @@ void setup() {
 }
 
 void loop() {
-  //IF SENSOR SEES SOMETHING, SEND 1, OTHERWISE SEND 0
-  (obst.start()== 1 || humid.start() == 1) ? msg[0] = 1 : msg[0] = 0;
+  //IF SENSOR SEES SOMETHING, SEND 1 FOR INFRARED, SEND 2 FOR HUMIDITY, OTHERWISE SEND 0
+  ((obst.start()== 1) ? msg[0] = 1 : msg[0] = 0 ) || ((humid.start() == 1) ? msg[0] = 2 : msg[0] = 0);
+  
   
   //FOR DEBUGGING
   Serial.print("Infrared sensor returned: ");
