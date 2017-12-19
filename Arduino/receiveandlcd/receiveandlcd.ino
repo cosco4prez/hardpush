@@ -39,11 +39,20 @@ void setup() {
 void loop() {
 
   int s = recv.start();
-  if(s == 1) {
+
+switch (s) {
+  case 1:
+    mystring = "Trash!";
+    break;
+  case 2:
+    mystring = "Plants!";
+    break;
+  default:
+    mystring = "Push Harder!";
+}
     lcd.print(mystring);
     delay(250);
     
-  }
   //Serial.println(s);
  // delay at the end of the full loop:
   delay(1000);
