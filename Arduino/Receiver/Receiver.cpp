@@ -6,7 +6,6 @@
 Receiver::Receiver(int rx_pin, int transmit_speed) {
 	_rx_pin = rx_pin;
 	_transmit_speed = transmit_speed;
-	//uint8_t currentPacket;
 	int id;
 	int value;
 }
