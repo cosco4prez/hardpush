@@ -8,6 +8,7 @@ class humiditySensor {
 	public:
 		humiditySensor(int pin, int threshold);
 		int start();
+		int value;
 	private:
 		int _pin;
 		int _threshold;

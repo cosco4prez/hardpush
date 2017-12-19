@@ -8,11 +8,12 @@ class Receiver {
 	public:
 		Receiver(int rx_pin, int _transmit_speed);
 		void setup();
-		int start();
+		uint8_t start();
+		int id;
+		int value;
 	private:
 		int _rx_pin;
 		int _transmit_speed;
-		uint8_t _currentPacket = 0;
 };
 
 #endif

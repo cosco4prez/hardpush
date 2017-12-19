@@ -6,7 +6,9 @@
 Receiver::Receiver(int rx_pin, int transmit_speed) {
 	_rx_pin = rx_pin;
 	_transmit_speed = transmit_speed;
-	uint8_t _currentPacket; 
+	//uint8_t currentPacket;
+	int id;
+	int value;
 }
 
 void Receiver::setup() {
@@ -15,14 +17,16 @@ void Receiver::setup() {
 	vw_rx_start();
 }
 
-int Receiver::start() {
+uint8_t Receiver::start() {
 	uint8_t buf[VW_MAX_MESSAGE_LEN];
 	uint8_t buflen = VW_MAX_MESSAGE_LEN;
 	
   if (vw_get_message(buf, &buflen)) {
-    _currentPacket = (uint8_t) buf[0];
-    Serial.print("Receiver got: ");
-    Serial.println(_currentPacket);
-	return _currentPacket;
+    //Serial.print("Receiver got: ");
+	//Serial.println(atoi(strtok((char*)buf, ".")));
+	//Serial.println(atoi(strtok(NULL, ".")));
+	Receiver::id = atoi(strtok((char*)buf, "."));
+	Receiver::value = atoi(strtok(NULL, "."));
+	return buf;
 	}
 }

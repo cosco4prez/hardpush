@@ -54,11 +54,10 @@ void setup() {
 }
 
 void loop() {
+  recv.start();
 
-  int p = sscanf ((char*)recv.start(), "%d%*c%d%", &id, &recvalue);
-  int s = recv.start();
-
-switch (s) {
+if (recv.value != 0) {
+switch (recv.id) {
   case 1:
     mystring = "Trash!";
     //analogWrite(redPin, 255);
@@ -69,13 +68,15 @@ switch (s) {
     softBlink(greenPin, maxBrightness, minBrightness, fadeAmount);
     break;
   default:
-    mystring = "Push Harder!";
+    mystring = "Push Harder!";}
 }
     lcd.print(mystring);
-    delay(250);
-    
-  Serial.println(s);
-  Serial.println(p);
+    delay(1250);
+
+    //Serial.print("S: ");
+  //Serial.println(s);
+  //Serial.print("P: ");
+  //Serial.println(p);
   lcd.clear();
   analogWrite(redPin, 0);
   analogWrite(greenPin, 0);

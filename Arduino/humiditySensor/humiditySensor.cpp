@@ -6,11 +6,13 @@
 humiditySensor::humiditySensor(int pin, int threshold) {
 	_pin = pin;
 	_threshold = threshold;
+	int value;
 }
 
 int humiditySensor::start() {
 	int s = 1023 - analogRead(_pin);
 	//Serial.print("Humidity sensor got: ");
 	//Serial.println(s);
+	humiditySensor::value = s;
 	return s >= _threshold ? 1 : 0;
 }
