@@ -17,18 +17,34 @@
 #include <Receiver.h>
 #include <LiquidCrystal.h>
 
-// initialize the library by associating any needed LCD interface pin
-// with the arduino pin number it is connected to
-//const int rs = 8, en = 9, d4 = 4, d5 = 5, d6 = 6, d7 = 7;
 const int rs = 12, en = 10, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
 LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
-String mystring = "Push Harder!";
-int strLength = mystring.length();
 
-Receiver recv(11,1000);
+String mystring = "";
+int strLength = mystring.length();
+int recPin = 11;
+int transmFreq = 1000;
+
+int baudRate = 9600;
+
+int redPin = 6;
+int greenPin = 7;
+int bluePin = 8;
+int whitePin = 9;
+
+int maxBrightness = 255;
+int minBrightness = 25;
+int fadeAmount = 2;
+
+Receiver recv(recPin,transmFreq);
 
 void setup() {
-  Serial.begin(9600);
+  pinMode(redPin, OUTPUT);
+  pinMode(greenPin, OUTPUT);
+  pinMode(bluePin, OUTPUT);
+  pinMode(whitePin, OUTPUT);
+  
+  Serial.begin(baudRate);
   // set up the LCD's number of columns and rows:
   lcd.begin(16, 2);
   // Print a message to the LCD.
@@ -43,9 +59,12 @@ void loop() {
 switch (s) {
   case 1:
     mystring = "Trash!";
+    //analogWrite(redPin, 255);
+    softBlink(redPin, maxBrightness, minBrightness, fadeAmount);
     break;
   case 2:
     mystring = "Plants!";
+    softBlink(greenPin, maxBrightness, minBrightness, fadeAmount);
     break;
   default:
     mystring = "Push Harder!";
@@ -53,10 +72,32 @@ switch (s) {
     lcd.print(mystring);
     delay(250);
     
-  //Serial.println(s);
- // delay at the end of the full loop:
-  delay(1000);
+  Serial.println(s);
   lcd.clear();
+  analogWrite(redPin, 0);
+  analogWrite(greenPin, 0);
+  analogWrite(bluePin, 0);
+  analogWrite(whitePin, 0);
 
 }
+
+void softBlink(int pin, int maxValue, int minValue, int fadeAmount)
+{
+  int brightness = minValue;
+  
+  while (brightness <= maxValue){
+    analogWrite(pin, brightness);
+    brightness = brightness + fadeAmount;
+
+    if (brightness >= maxValue) {
+      fadeAmount = -fadeAmount;
+    }
+    if (brightness < minValue){
+      break;
+    }
+    delay(10);
+    }
+  // wait for 30 milliseconds to see the dimming effect
+  
+   }
 
