@@ -37,6 +37,7 @@ int minBrightness = 25;
 int fadeAmount = 2;
 //Receiver class
 Receiver recv(recPin,transmFreq);
+String oldString = "";
 
 void setup() {
   //Set up LCD (columns, rows)
@@ -85,12 +86,16 @@ switch (recv.id) {
     break;
   default:
     mystring = "Push Harder!";
-    if (isdone == 1) {mystring = "Laundry!";}
+    if (isdone == 1) {mystring = "Laundry!"; softBlink(bluePin, maxBrightness, minBrightness, fadeAmount);}
     }
   //print to LCD
-  lcd.print(mystring);
-  delay(1000);
-  lcd.clear();
+  
+  if (oldString == "" || (mystring != oldString && mystring != "")){
+    lcd.clear();
+    delay(10);
+    lcd.print(mystring);
+  };
+    oldString = mystring;
   //clear LEDs
   analogWrite(redPin, 0);
   analogWrite(greenPin, 0);
@@ -135,7 +140,7 @@ int webserver() {
           Serial.println(c);
           if(c == '1'){
             Serial.println("ON");
-            timer.setTimeout(10000, tdone);
+            timer.setTimeout(5000, tdone);
             client.println("HTTP/1.1 200 OK");
             client.println("Content-Type: text/html");
             client.println("Connection: close");  // the connection will be closed after completion of the response
@@ -168,9 +173,10 @@ int webserver() {
           // you've gotten a character on the current line
           currentLineIsBlank = false;}
         }// end if (client.available())
+        delay(200);
         return 1;
       } // end while (client.connected())
-    delay(10);      // give the web browser time to receive the data
+    //delay(10);      // give the web browser time to receive the data
     client.stop();// close the connection
   } // end if (client)
 }
